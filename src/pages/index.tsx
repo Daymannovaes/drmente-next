@@ -1,21 +1,12 @@
 import Head from "next/head";
-import Link from "next/link";
-import { useEffect } from "react";
 import { fbq } from "@/utils/fbq";
+import Footer from "@/components/Footer";
 
 export default function Home() {
-  useEffect(() => {
-    // Add click handlers for CTA buttons
-    const ctaButtons = document.querySelectorAll('button');
-    ctaButtons.forEach(button => {
-      if (button.textContent?.includes('Começar') || button.textContent?.includes('Renovar') || button.textContent?.includes('Escolher')) {
-        button.addEventListener('click', function() {
-          fbq.trackCustom('lp1-clicked-form');
-          window.open('https://formshare.ai/s/Vkz3Dx3jE8', '_blank');
-        });
-      }
-    });
-  }, []);
+  function handleCTAClick() {
+    fbq.trackCustom('lp1-clicked-form');
+    window.open('https://formshare.ai/s/Vkz3Dx3jE8', '_blank');
+  }
 
   return (
     <>
@@ -118,7 +109,7 @@ export default function Home() {
                 </svg>
                 <span className="text-xl font-bold text-gray-900">DrMente</span>
               </div>
-              <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors focus-visible" aria-label="Começar renovação">
+              <button onClick={handleCTAClick} className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors focus-visible" aria-label="Começar renovação">
                 Começar Agora
               </button>
             </div>
@@ -137,7 +128,7 @@ export default function Home() {
               <p className="text-xl sm:text-2xl text-gray-700 mb-8 max-w-2xl mx-auto">
                 Processo 100% online, seguro e regulamentado. Receba em até 24 horas.
               </p>
-              <button className="bg-blue-600 text-white px-8 py-4 text-lg font-semibold rounded-lg hover:bg-blue-700 transform hover:scale-105 transition-all duration-200 shadow-lg focus-visible" aria-label="Renovar receita médica agora">
+              <button onClick={handleCTAClick} className="bg-blue-600 text-white px-8 py-4 text-lg font-semibold rounded-lg hover:bg-blue-700 transform hover:scale-105 transition-all duration-200 shadow-lg focus-visible" aria-label="Renovar receita médica agora">
                 Renovar Minha Receita
               </button>
               <p className="text-sm text-gray-600 mt-4">
@@ -156,19 +147,19 @@ export default function Home() {
             <div className="grid md:grid-cols-3 gap-8">
               <div className="text-center">
                 <div className="bg-gray-100 rounded-lg p-6 mb-4">
-                  <p className="text-gray-700 italic">"O atendimento foi espetacular, recebi minha receita em 6 horas. Muito prático!"</p>
+                  <p className="text-gray-700 italic">&quot;O atendimento foi espetacular, recebi minha receita em 6 horas. Muito prático!&quot;</p>
                 </div>
                 <p className="font-semibold">Eduardo A., Niterói - RJ</p>
               </div>
               <div className="text-center">
                 <div className="bg-gray-100 rounded-lg p-6 mb-4">
-                  <p className="text-gray-700 italic">"Já economizei R$ 600 em consultas em apenas 6 meses. Recomendo!"</p>
+                  <p className="text-gray-700 italic">&quot;Já economizei R$ 600 em consultas em apenas 6 meses. Recomendo!&quot;</p>
                 </div>
                 <p className="font-semibold">Carla M., Salvador - BA</p>
               </div>
               <div className="text-center">
                 <div className="bg-gray-100 rounded-lg p-6 mb-4">
-                  <p className="text-gray-700 italic">"A plataforma é muito simples de usar e os médicos são muito profissionais."</p>
+                  <p className="text-gray-700 italic">&quot;A plataforma é muito simples de usar e os médicos são muito profissionais.&quot;</p>
                 </div>
                 <p className="font-semibold">Jorge L., Belo Horizonte - MG</p>
               </div>
@@ -346,7 +337,7 @@ export default function Home() {
                     <span>Reembolso se não aprovado</span>
                   </li>
                 </ul>
-                <button className="w-full bg-blue-600 text-white py-4 text-lg font-semibold rounded-lg hover:bg-blue-700 transition-colors focus-visible">
+                <button onClick={handleCTAClick} className="w-full bg-blue-600 text-white py-4 text-lg font-semibold rounded-lg hover:bg-blue-700 transition-colors focus-visible">
                   Renovar Minha Receita
                 </button>
                 <p className="text-sm text-gray-600 mt-4">
@@ -490,7 +481,7 @@ export default function Home() {
             <p className="text-xl text-blue-100 mb-8">
               Economize tempo e dinheiro. Processo 100% online e seguro.
             </p>
-            <button className="bg-white text-blue-600 px-8 py-4 text-lg font-semibold rounded-lg hover:bg-gray-50 transform hover:scale-105 transition-all duration-200 shadow-lg focus-visible" aria-label="Começar renovação de receita médica">
+            <button onClick={handleCTAClick} className="bg-white text-blue-600 px-8 py-4 text-lg font-semibold rounded-lg hover:bg-gray-50 transform hover:scale-105 transition-all duration-200 shadow-lg focus-visible" aria-label="Começar renovação de receita médica">
               Começar Agora
             </button>
             <p className="text-blue-100 text-sm mt-4">
@@ -499,55 +490,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Footer */}
-        <footer className="bg-gray-900 text-gray-300 py-12" role="contentinfo">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid md:grid-cols-4 gap-8">
-              <div>
-                <div className="flex items-center space-x-2 mb-4">
-                  <svg className="h-8 w-8" viewBox="0 0 24 24" role="img" aria-label="Logotipo: cruz médica" xmlns="http://www.w3.org/2000/svg">
-                    <title>DrMente</title>
-                    <rect x="3" y="3" width="18" height="18" rx="4" fill="#1d4ed8"></rect>
-                    <path d="M12 7v10M7 12h10" stroke="white" strokeWidth="2" strokeLinecap="round" />
-                  </svg>
-                  <span className="text-xl font-bold text-white">DrMente</span>
-                </div>
-                <p className="text-sm">
-                  Renovação de receitas médicas de forma segura, rápida e regulamentada.
-                </p>
-              </div>
-              <div>
-                <h3 className="font-semibold text-white mb-4">Legal</h3>
-                <ul className="space-y-2 text-sm">
-                  <li><a href="#" className="hover:text-white transition-colors focus-visible">Termos de Uso</a></li>
-                  <li><a href="#" className="hover:text-white transition-colors focus-visible">Política de Privacidade</a></li>
-                  <li><a href="#" className="hover:text-white transition-colors focus-visible">Contato</a></li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="font-semibold text-white mb-4">Suporte</h3>
-                <ul className="space-y-2 text-sm">
-                  <li><a href="#" className="hover:text-white transition-colors focus-visible">FAQ</a></li>
-                  <li><a href="#" className="hover:text-white transition-colors focus-visible">Central de Ajuda</a></li>
-                  <li><a href="mailto:suporte@drmente.com" className="hover:text-white transition-colors focus-visible">suporte@drmente.com</a></li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="font-semibold text-white mb-4">Médico?</h3>
-                <ul className="space-y-2 text-sm">
-                  <li><a href="#" className="hover:text-white transition-colors focus-visible">Trabalhe Conosco</a></li>
-                  <li><a href="#" className="hover:text-white transition-colors focus-visible">Parceiros</a></li>
-                </ul>
-              </div>
-            </div>
-            <div className="border-t border-gray-800 mt-8 pt-8 text-sm text-center">
-              <p className="mb-4">
-                <strong>Aviso Médico:</strong> Este serviço é destinado exclusivamente para renovação de receitas médicas já estabelecidas. Não substitui consulta médica completa. Em caso de dúvidas sobre sua condição de saúde, consulte um médico presencialmente.
-              </p>
-              <p>&copy; {new Date().getFullYear()} DrMente. Todos os direitos reservados.</p>
-            </div>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </>
   );
