@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "NODE_OPTIONS= next dev --turbopack",
-    "build": "next build --turbopack",
+    "build": "next build",
+    "build:local": "NODE_OPTIONS= next build",
     "start": "next start",
     "lint": "eslint"
   },
