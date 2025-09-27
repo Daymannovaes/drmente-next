@@ -1,10 +1,9 @@
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
+import { fbq } from "@/utils/fbq";
 
 export default function Sucesso() {
-  const router = useRouter();
   const [protocolo, setProtocolo] = useState(" ");
   const [email, setEmail] = useState(" ");
 
@@ -15,6 +14,14 @@ export default function Sucesso() {
     const mail = params.get('email') || params.get('e') || "";
     setProtocolo(proto);
     setEmail(mail);
+
+    console.log(protocolo, email);
+  }, [protocolo, email]);
+
+  // Track conversion events once
+  useEffect(() => {
+    fbq.trackLead();
+    fbq.trackCustom('lp1-completed-form');
   }, []);
 
   return (
@@ -99,9 +106,9 @@ export default function Sucesso() {
             })
           }}
         />
-      </Head>
+        </Head>
 
-      <div className={`antialiased text-slate-900 bg-white`}>
+        <div className={`antialiased text-slate-900 bg-white`}>
         <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:bg-white focus:px-3 focus:py-2 focus:rounded">
           Pular para o conteúdo
         </a>
@@ -138,9 +145,18 @@ export default function Sucesso() {
                   Entraremos em contato em breve por e-mail ou WhatsApp.
                 </p>
                 <div className="mt-8 flex flex-wrap gap-3">
-                  <a href="#status" className="inline-flex items-center rounded-xl bg-blue-700 px-6 py-3 text-white font-semibold shadow hover:bg-blue-800 focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-300" aria-label="Ver status do pedido">
+                  <button
+                    onClick={() => {
+                      document.getElementById('status')?.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                      });
+                    }}
+                    className="inline-flex items-center rounded-xl bg-blue-700 px-6 py-3 text-white font-semibold shadow hover:bg-blue-800 focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-300 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                    aria-label="Ver status do pedido"
+                  >
                     Ver status
-                  </a>
+                  </button>
                 </div>
               </div>
 
