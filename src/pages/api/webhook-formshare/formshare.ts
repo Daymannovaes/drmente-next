@@ -72,8 +72,8 @@ export function extractPersonalData(response: FormShareResponse): PersonalData {
     phone: getAnswersByType(response, 'phone')[0],
     email: getAnswersByType(response, 'email')[0],
 
-    cpf: getAnswersByType(response, 'cpf')[0] || getAnswerByQuestionPattern(response, /CPF/),
-    birthdate: getAnswersByType(response, 'birthdate')[0] || getAnswerByQuestionPattern(response, /Data de nascimento/i),
+    cpf: getAnswerByQuestionPattern(response, /CPF/),
+    birthdate: getAnswerByQuestionPattern(response, /Data de nascimento/i),
   };
 }
 

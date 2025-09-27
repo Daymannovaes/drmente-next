@@ -1,7 +1,7 @@
 // Facebook Pixel utility functions
 declare global {
   interface Window {
-    fbq: (action: string, event: string, params?: unknown) => void;
+    fbq: (action: 'track' | 'trackCustom' | 'init', event: string, params?: Record<string, unknown>) => void;
   }
 }
 
@@ -21,7 +21,7 @@ export const fbq = {
   },
 
   // Track custom events
-  trackCustom: (eventName: string, params?: unknown) => {
+  trackCustom: (eventName: string, params?: Record<string, unknown>) => {
     if (typeof window !== 'undefined' && window.fbq) {
       window.fbq('trackCustom', eventName, params);
     }
